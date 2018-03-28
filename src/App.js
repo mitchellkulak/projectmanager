@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 import $ from 'jquery';
 import Projects from './Components/Projects';
 import AddProject from './Components/AddProject';
 import Todos from './Components/Todos';
 import './App.css';
+import * as firebase from "firebase";
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCXdLc6FtkesCO1LV570paOYlVCtXXp258",
+    authDomain: "project-organizer-infinite.firebaseapp.com",
+    databaseURL: "https://project-organizer-infinite.firebaseio.com",
+    projectId: "project-organizer-infinite",
+    storageBucket: "project-organizer-infinite.appspot.com",
+    messagingSenderId: "730458003442"
+};
+firebase.initializeApp(config);
+// The key of a root reference is null
+var firebaseRef = firebase.database().ref();
 
 class App extends Component {
   constructor(){
@@ -32,28 +45,25 @@ class App extends Component {
   }
 
   getProjects(){
-    this.setState({projects: [
-      {
-        id:uuid.v4(),
-        title: 'Business Website',
-        category: 'Web Deisgn'
-      },
-      {
-        id:uuid.v4(),
-        title: 'Social App',
-        category: 'Mobile Development'
-      },
-      {
-        id:uuid.v4(),
-        title: 'Ecommerce Shopping Cart',
-        category: 'Web Development'
-      }
-    ]});
+    this.setState({projects: []
+    });
   }
 
-  componentWillMount(){
-    this.getProjects();
-    this.getTodos();
+  componentWillMount() {
+      this.getProjects();
+      this.getTodos();
+      let projectRef = firebaseRef.child("project");
+      let projects = [];
+      projectRef.on("child_added", snapshot => {
+          //console.log(snapshot.val());
+          let project = {
+              id: snapshot.val().id,
+              title: snapshot.val().title,
+              category: snapshot.val().category
+          };
+          projects.push(project);
+          this.setState({projects: projects});
+      })
   }
 
   componentDidMount(){
@@ -61,6 +71,8 @@ class App extends Component {
   }
 
   handleAddProject(project){
+    let projectRef = firebaseRef.child("project");
+    projectRef.push(project);
     let projects = this.state.projects;
     projects.push(project);
     this.setState({projects:projects});

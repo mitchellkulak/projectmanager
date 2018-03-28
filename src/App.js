@@ -16,7 +16,7 @@ var config = {
     messagingSenderId: "730458003442"
 };
 firebase.initializeApp(config);
-// The key of a root reference is null
+// The root reference
 var firebaseRef = firebase.database().ref();
 
 class App extends Component {

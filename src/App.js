@@ -7,7 +7,7 @@ import './App.css';
 import * as firebase from "firebase";
 
 // Initialize Firebase
-var config = {
+const config = {
     apiKey: "AIzaSyCXdLc6FtkesCO1LV570paOYlVCtXXp258",
     authDomain: "project-organizer-infinite.firebaseapp.com",
     databaseURL: "https://project-organizer-infinite.firebaseio.com",
@@ -17,7 +17,7 @@ var config = {
 };
 firebase.initializeApp(config);
 // The root reference
-var firebaseRef = firebase.database().ref();
+let firebaseRef = firebase.database().ref();
 
 class App extends Component {
   constructor(){
@@ -45,8 +45,7 @@ class App extends Component {
   }
 
   getProjects(){
-    this.setState({projects: []
-    });
+    this.setState({projects: []});
   }
 
   componentWillMount() {
@@ -72,7 +71,10 @@ class App extends Component {
 
   handleAddProject(project){
     let projectRef = firebaseRef.child("project");
-    projectRef.push(project);
+    projectRef.push(project)
+        .catch(error => {
+            console.log(error.message);
+        });
     let projects = this.state.projects;
     projects.push(project);
     this.setState({projects:projects});
@@ -81,6 +83,12 @@ class App extends Component {
   handleDeleteProject(id){
     let projects = this.state.projects;
     let index = projects.findIndex(x => x.id === id);
+    let projectRef = firebaseRef.child("project");
+    projectRef.on("child_added", snapshot => {
+      if (snapshot.val().id == id) {
+        snapshot.ref.remove();
+      }
+    })
     projects.splice(index, 1);
     this.setState({projects:projects});
   }

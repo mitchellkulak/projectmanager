@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProjectItem from './ProjectItem';
+import {Panel} from 'react-bootstrap';
 
 class Projects extends Component {
   deleteProject(id){
@@ -18,8 +19,16 @@ class Projects extends Component {
     }
     return (
       <div className="Projects">
-        <h3>Latest Projects</h3>
-        {projectItems}
+        {/* <h3>Latest Projects</h3>
+        {projectItems} */}
+        <Panel bsStyle="primary">
+          <Panel.Heading>
+            <Panel.Title>Lastest Projects</Panel.Title>
+          </Panel.Heading>
+          <Panel.Body>
+            {projectItems}
+          </Panel.Body>
+        </Panel>
       </div>
     );
   }

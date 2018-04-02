@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Projects from './Components/Projects';
 import AddProject from './Components/AddProject';
-import Todos from './Components/Todos';
+// import Todos from './Components/Todos';
 import './App.css';
 import * as firebase from "firebase";
 
@@ -83,12 +83,13 @@ class App extends Component {
   handleDeleteProject(id){
     let projects = this.state.projects;
     let index = projects.findIndex(x => x.id === id);
+    //Remove selected project from firebase.
     let projectRef = firebaseRef.child("project");
     projectRef.on("child_added", snapshot => {
-      if (snapshot.val().id == id) {
+      if (snapshot.val().id === id) {
         snapshot.ref.remove();
       }
-    })
+    });
     projects.splice(index, 1);
     this.setState({projects:projects});
   }
@@ -99,7 +100,7 @@ class App extends Component {
         <AddProject addProject={this.handleAddProject.bind(this)} />
         <Projects projects={this.state.projects} onDelete={this.handleDeleteProject.bind(this)} />
         <hr />
-        <Todos todos={this.state.todos} />
+        {/* <Todos todos={this.state.todos} /> */}
       </div>
     );
   }

@@ -13,12 +13,18 @@ class ProjectItem extends Component {
       //  {/* <strong>{this.props.project.title}</strong>: {this.props.project.category} <a href="#" onClick={this.deleteProject.bind(this, this.props.project.id)}>X</a> */}
       //  {/* <strong>{this.props.project.title}</strong>: {this.props.project.category} <a href="#" onClick={this.deleteProject.bind(this, this.props.project.id)}><Glyphicon glyph="remove"></Glyphicon></a> */}
       // </li>
-      <Panel className="Project">
-        <Panel.Heading>
-          <Panel.Title>{this.props.project.title} <a href="#" onClick={this.deleteProject.bind(this, this.props.project.id)}><Glyphicon glyph="remove"></Glyphicon></a></Panel.Title>
+      
+        <Panel className="Project" bsStyle="success" >
+          <Panel.Heading>
+            <Panel.Title>{this.props.project.title} 
+              <a href="#" onClick={this.deleteProject.bind(this, this.props.project.id)}>
+                <Glyphicon glyph="remove"></Glyphicon>
+              </a>
+            </Panel.Title>
+          </Panel.Heading>
           <Panel.Body>Category: {this.props.project.category}</Panel.Body>
-        </Panel.Heading>
-      </Panel>
+        </Panel>
+      
     );
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProjectItem from './ProjectItem';
-import {Panel} from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
+import { PanelGroup } from "react-bootstrap";
 
 class Projects extends Component {
   deleteProject(id){
@@ -20,15 +21,22 @@ class Projects extends Component {
     return (
       <div className="Projects">
         {/* <h3>Latest Projects</h3>
-        {projectItems} */}
-        <Panel bsStyle="primary">
+        {/* {projectItems} */}
+        {/* <Panel bsStyle="primary">
           <Panel.Heading>
             <Panel.Title>Lastest Projects</Panel.Title>
           </Panel.Heading>
-          <Panel.Body>
+          <Panel.Body> */}
+          <PanelGroup id="projectsPanel">
+            {/* <Panel bsStyle="primary" > */}
+              <Panel.Heading>
+                <Panel.Title>Latest Projects</Panel.Title>
+              </Panel.Heading>
+            {/* </Panel> */}
             {projectItems}
-          </Panel.Body>
-        </Panel>
+          </PanelGroup>    
+          {/* </Panel.Body>
+        </Panel> */}
       </div>
     );
   }

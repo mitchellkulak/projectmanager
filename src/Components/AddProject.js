@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
-import {DropdownButton} from 'react-bootstrap';
-import {MenuItem} from 'react-bootstrap';
+import { DropdownButton } from 'react-bootstrap';
+import { MenuItem } from 'react-bootstrap';
+import { FormControl } from "react-bootstrap";
+import { Button } from 'react-bootstrap';
 
 class AddProject extends Component {
   constructor(){
@@ -56,7 +58,7 @@ class AddProject extends Component {
             </DropdownButton> */}
           </div>
           <br />
-          <input type="submit" value="Submit" />
+          <Button type="submit" value="Submit">Submit</Button>
           <br />
         </form>
       </div>

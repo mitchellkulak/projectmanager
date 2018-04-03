@@ -22,6 +22,7 @@ class ProjectItem extends Component {
               </a>
             </Panel.Title>
           </Panel.Heading>
+          <Panel.Body>Notes: {this.props.project.notes}</Panel.Body>         
           <Panel.Body>Category: {this.props.project.category}</Panel.Body>
         </Panel>
       

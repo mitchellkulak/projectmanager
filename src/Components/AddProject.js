@@ -24,7 +24,8 @@ class AddProject extends Component {
       this.setState({newProject:{
         id: uuid.v4(),
         title: this.refs.title.value,
-        category: this.refs.category.value
+        category: this.refs.category.value,
+        notes: this.refs.notes.value
       }}, function(){
         //console.log(this.state);
         this.props.addProject(this.state.newProject);
@@ -48,6 +49,12 @@ class AddProject extends Component {
             <label>Title</label><br />
             <input type="text" ref="title" />
           </div>
+          <br/>
+          <div>
+            <label>Notes</label><br />
+            <input type="text" ref="notes" />
+          </div>
+          <br/>
           <div>
             <label>Category</label><br />
             <select ref="category">
@@ -57,6 +64,7 @@ class AddProject extends Component {
               {categoryOptions}
             </DropdownButton> */}
           </div>
+          
           <br />
           <Button type="submit" value="Submit">Submit</Button>
           <br />

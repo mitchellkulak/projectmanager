@@ -5,6 +5,7 @@ import { MenuItem } from 'react-bootstrap';
 import { FormControl } from "react-bootstrap";
 import { Button } from 'react-bootstrap';
 
+
 class AddProject extends Component {
   constructor(){
     super();
@@ -25,7 +26,8 @@ class AddProject extends Component {
         id: uuid.v4(),
         title: this.refs.title.value,
         category: this.refs.category.value,
-        notes: this.refs.notes.value
+        notes: this.refs.notes.value,
+        progress: this.refs.progress.value
       }}, function(){
         //console.log(this.state);
         this.props.addProject(this.state.newProject);
@@ -56,6 +58,12 @@ class AddProject extends Component {
           </div>
           <br/>
           <div>
+            <label>Percent Complete</label><br />
+            <input type="text" ref="progress" />
+          </div>
+          <br/>
+          <div>
+            
             <label>Category</label><br />
             <select ref="category">
               {categoryOptions}
@@ -67,6 +75,8 @@ class AddProject extends Component {
           
           <br />
           <Button type="submit" value="Submit">Submit</Button>
+          
+          
           <br />
         </form>
       </div>

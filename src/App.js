@@ -59,7 +59,9 @@ class App extends Component {
               id: snapshot.val().id,
               title: snapshot.val().title,
               category: snapshot.val().category,
-              notes: snapshot.val().notes
+              notes: snapshot.val().notes,
+              progress: snapshot.val().progress
+
           };
           projects.push(project);
           this.setState({projects: projects});

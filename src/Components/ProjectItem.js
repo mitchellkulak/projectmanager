@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import {Glyphicon} from 'react-bootstrap';
 import {Panel} from 'react-bootstrap';
+import {ProgressBar} from 'react-bootstrap';
+
 
 class ProjectItem extends Component {
   deleteProject(id){
     this.props.onDelete(id);
   }
 
+ 
+ 
   render() {
     return (
       //{/* <li className="Project"> */}
@@ -22,8 +26,11 @@ class ProjectItem extends Component {
               </a>
             </Panel.Title>
           </Panel.Heading>
+          <br/>
+          <ProgressBar now={this.props.project.progress} />
           <Panel.Body>Notes: {this.props.project.notes}</Panel.Body>         
           <Panel.Body>Category: {this.props.project.category}</Panel.Body>
+         
         </Panel>
       
     );

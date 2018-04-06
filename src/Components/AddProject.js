@@ -19,9 +19,13 @@ class AddProject extends Component {
   }
 
   handleSubmit(e){
-    if(this.refs.title.value === ''){
-      alert('Title is required');
-    } else {
+    if(this.refs.title.value === ''){ alert('Title is required'); return; } 
+    if(this.refs.progress.value === ''){ alert('Progress is required'); return; } 
+    if(isNaN(this.refs.progress.value)){ alert('Progress is required'); return; }
+    if(this.refs.progress.value > 100 || this.refs.progress.value < 0 ){ alert('Progress is required'); return; }
+    
+    
+
       this.setState({newProject:{
         id: uuid.v4(),
         title: this.refs.title.value,
@@ -32,9 +36,9 @@ class AddProject extends Component {
         //console.log(this.state);
         this.props.addProject(this.state.newProject);
       });
-    }
     e.preventDefault();
   }
+  
 
   render() {
     let categoryOptions = this.props.categories.map(category => {

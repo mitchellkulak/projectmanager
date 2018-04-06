@@ -95,6 +95,7 @@ class App extends Component {
     });
     projects.splice(index, 1);
     this.setState({projects:projects});
+    
   }
 
   render() {

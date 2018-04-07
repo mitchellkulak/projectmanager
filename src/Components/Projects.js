@@ -8,35 +8,28 @@ class Projects extends Component {
     this.props.onDelete(id);
   }
 
+  editNotes(id, notes){
+    this.props.onChange(id, notes);
+  }
+
   render() {
     let projectItems;
     if(this.props.projects){
       projectItems = this.props.projects.map(project => {
         //console.log(project);
         return (
-          <ProjectItem onDelete={this.deleteProject.bind(this)} key={project.title} project={project} />
+          <ProjectItem onChange={this.editNotes.bind(this)} onDelete={this.deleteProject.bind(this)} key={project.title} project={project} />
         );
       });
     }
     return (
-      <div className="Projects"> 
-        {/* <h3>Latest Projects</h3>
-        {/* {projectItems} */}
-        {/* <Panel bsStyle="primary">
-          <Panel.Heading>
-            <Panel.Title>Lastest Projects</Panel.Title>
-          </Panel.Heading>
-          <Panel.Body> */}
+      <div className="Projects">
           <PanelGroup id="projectsPanel">
-            {/* <Panel bsStyle="primary" > */}
               <Panel.Heading>
                 <Panel.Title>Latest Projects</Panel.Title>
               </Panel.Heading>
-            {/* </Panel> */}
             {projectItems}
-          </PanelGroup>    
-          {/* </Panel.Body>
-        </Panel> */}
+          </PanelGroup>
       </div>
     );
   }
@@ -44,7 +37,8 @@ class Projects extends Component {
 
 Projects.propTypes = {
   projects: React.PropTypes.array,
-  onDelete: React.PropTypes.func
+  onDelete: React.PropTypes.func,
+  onChange: React.PropTypes.func
 }
 
 export default Projects;

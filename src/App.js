@@ -95,11 +95,22 @@ class App extends Component {
     this.setState({projects:projects});
   }
 
+  handleEditNotes(id, notes){
+    let projectRef = firebaseRef.child("project");
+    console.log(id);
+    console.log(notes);
+    projectRef.on("child_added", snapshot => {
+      if (snapshot.val().id === id) {
+        snapshot.ref.update({ notes: notes});
+      }
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <AddProject addProject={this.handleAddProject.bind(this)} />
-        <Projects projects={this.state.projects} onDelete={this.handleDeleteProject.bind(this)} />
+        <Projects projects={this.state.projects} onChange={this.handleEditNotes.bind(this)} onDelete={this.handleDeleteProject.bind(this)} />
         <hr />
         {/* <Todos todos={this.state.todos} /> */}
       </div>

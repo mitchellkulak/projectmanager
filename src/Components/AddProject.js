@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
-import { DropdownButton } from 'react-bootstrap';
-import { MenuItem } from 'react-bootstrap';
-import { FormControl } from "react-bootstrap";
+//import { DropdownButton } from 'react-bootstrap';
+//import { MenuItem } from 'react-bootstrap';
+//import { FormControl } from "react-bootstrap";
 import { Button } from 'react-bootstrap';
 
 class AddProject extends Component {
@@ -15,7 +15,7 @@ class AddProject extends Component {
 
   static defaultProps = {
     categories: ['Web Design', 'Web Development', 'Mobile Development', 'Maintenance']
-  }
+  };
 
   handleSubmit(e){
     if(this.refs.title.value === ''){
@@ -38,9 +38,9 @@ class AddProject extends Component {
     let categoryOptions = this.props.categories.map(category => {
       return <option key={category} value={category}>{category}</option>
     });
-    let categoryMenuItem = this.props.categories.map(category => {
-      return <MenuItem key={category} value={category}>{category}</MenuItem>
-    });
+    // let categoryMenuItem = this.props.categories.map(category => {
+    //   return <MenuItem key={category} value={category}>{category}</MenuItem>
+    // });
     return (
       <div>
         <h3>Add Project</h3>
@@ -77,6 +77,6 @@ class AddProject extends Component {
 AddProject.propTypes = {
   categories: React.PropTypes.array,
   addProject: React.PropTypes.func
-}
+};
 
 export default AddProject;

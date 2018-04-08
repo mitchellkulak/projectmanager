@@ -30,7 +30,8 @@ class ProjectItem extends Component {
               </a>
             </Panel.Title>
           </Panel.Heading>
-          <ProgressBar now={this.props.project.progress} />
+          <br/>
+          <ProgressBar bsStyle="success" now={this.props.project.progress} />
           <br/>
           <Panel.Body>Category: {this.props.project.category}</Panel.Body>
           <Panel.Body><Label>Notes:</Label> 

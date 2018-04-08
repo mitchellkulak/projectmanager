@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import uuid from 'uuid';
-//import { DropdownButton } from 'react-bootstrap';
-//import { MenuItem } from 'react-bootstrap';
 //import { FormControl } from "react-bootstrap";
 import { Button } from 'react-bootstrap';
 
@@ -14,7 +13,7 @@ class AddProject extends Component {
   }
 
   static defaultProps = {
-    categories: ['Web Design', 'Web Development', 'Mobile Development', 'Maintenance']
+    categories: ['Web Design', 'Web Development', 'Mobile Development', 'Maintenance', 'Research']
   };
 
   handleSubmit(e){
@@ -60,9 +59,6 @@ class AddProject extends Component {
             <select ref="category">
               {categoryOptions}
             </select>
-            {/* <DropdownButton ref="category">
-              {categoryOptions}
-            </DropdownButton> */}
           </div>
           
           <br />
@@ -75,8 +71,8 @@ class AddProject extends Component {
 }
 
 AddProject.propTypes = {
-  categories: React.PropTypes.array,
-  addProject: React.PropTypes.func
+  categories: PropTypes.array,
+  addProject: PropTypes.func
 };
 
 export default AddProject;

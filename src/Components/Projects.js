@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ProjectItem from './ProjectItem';
 import { Panel } from 'react-bootstrap';
 import { PanelGroup } from "react-bootstrap";
@@ -36,9 +37,9 @@ class Projects extends Component {
 }
 
 Projects.propTypes = {
-  projects: React.PropTypes.array,
-  onDelete: React.PropTypes.func,
-  onChange: React.PropTypes.func
+  projects: PropTypes.array,
+  onDelete: PropTypes.func,
+  onChange: PropTypes.func
 }
 
 export default Projects;

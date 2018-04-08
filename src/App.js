@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Projects from './Components/Projects';
 import AddProject from './Components/AddProject';
+import { Grid } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 // import Todos from './Components/Todos';
 import './App.css';
 import * as firebase from "firebase";
@@ -96,9 +99,9 @@ class App extends Component {
   }
 
   handleEditNotes(id, notes){
+    //console.log(id);
+    //console.log(notes);
     let projectRef = firebaseRef.child("project");
-    console.log(id);
-    console.log(notes);
     projectRef.on("child_added", snapshot => {
       if (snapshot.val().id === id) {
         snapshot.ref.update({ notes: notes});
@@ -108,12 +111,25 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <AddProject addProject={this.handleAddProject.bind(this)} />
-        <Projects projects={this.state.projects} onChange={this.handleEditNotes.bind(this)} onDelete={this.handleDeleteProject.bind(this)} />
-        <hr />
-        {/* <Todos todos={this.state.todos} /> */}
-      </div>
+      <Grid>
+        <Row>
+          <Col md={8} mdOffset={2}>
+            <div className="App">
+              
+              <Projects projects={this.state.projects} 
+                        onChange={this.handleEditNotes.bind(this)} 
+                        onDelete={this.handleDeleteProject.bind(this)} />
+              <hr />
+              {/* <Todos todos={this.state.todos} /> */}
+            </div>
+          </Col>
+          <Col>
+            <div>
+              <AddProject addProject={this.handleAddProject.bind(this)} />
+            </div>
+          </Col>
+        </Row>  
+      </Grid>
     );
   }
 }

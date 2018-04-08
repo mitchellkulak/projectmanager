@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {Glyphicon} from 'react-bootstrap';
 import {Panel} from 'react-bootstrap';
+import {Label} from 'react-bootstrap';
 import ContentEditable from 'react-contenteditable';
 
 class ProjectItem extends Component {
@@ -11,8 +13,6 @@ class ProjectItem extends Component {
   handleChange = evt => {
     // Change the project's current notes state.
     this.setState({html: evt.target.value});
-    //console.log(evt.target.value);
-    //console.log(this.props.project.id);
     // Send the project's id and updated notes to firebase.
     this.props.onChange(this.props.project.id, evt.target.value);
   };
@@ -20,7 +20,7 @@ class ProjectItem extends Component {
   render() {
     return (
       
-        <Panel className="Project" bsStyle="success" >
+        <Panel className="Project" bsStyle="primary" >
           <Panel.Heading>
             <Panel.Title>{this.props.project.title}
               <a href="#" onClick={this.deleteProject.bind(this, this.props.project.id)}>
@@ -29,7 +29,7 @@ class ProjectItem extends Component {
             </Panel.Title>
           </Panel.Heading>
           <Panel.Body>Category: {this.props.project.category}</Panel.Body>
-          <Panel.Body>Notes: 
+          <Panel.Body><Label>Notes:</Label> 
             <ContentEditable html={this.props.project.notes} onChange={this.handleChange}></ContentEditable>
           </Panel.Body>
         </Panel>
@@ -39,9 +39,9 @@ class ProjectItem extends Component {
 }
 
 ProjectItem.propTypes = {
-  project: React.PropTypes.object,
-  onDelete: React.PropTypes.func,
-  onChange: React.PropTypes.func
+  project: PropTypes.object,
+  onDelete: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 export default ProjectItem;

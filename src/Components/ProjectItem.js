@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {Glyphicon} from 'react-bootstrap';
 import {Panel} from 'react-bootstrap';
+import {Label} from 'react-bootstrap';
+import ContentEditable from 'react-contenteditable';
 import {ProgressBar} from 'react-bootstrap';
 
 
@@ -9,28 +12,30 @@ class ProjectItem extends Component {
     this.props.onDelete(id);
   }
 
- 
- 
+  handleChange = evt => {
+    // Change the project's current notes state.
+    this.setState({html: evt.target.value});
+    // Send the project's id and updated notes to firebase.
+    this.props.onChange(this.props.project.id, evt.target.value);
+  };
+
   render() {
     return (
-      //{/* <li className="Project"> */}
-      //  {/* <strong>{this.props.project.title}</strong>: {this.props.project.category} <a href="#" onClick={this.deleteProject.bind(this, this.props.project.id)}>X</a> */}
-      //  {/* <strong>{this.props.project.title}</strong>: {this.props.project.category} <a href="#" onClick={this.deleteProject.bind(this, this.props.project.id)}><Glyphicon glyph="remove"></Glyphicon></a> */}
-      // </li>
       
-        <Panel className="Project" bsStyle="success" >
+        <Panel className="Project" bsStyle="primary" >
           <Panel.Heading>
-            <Panel.Title>{this.props.project.title} 
+            <Panel.Title>{this.props.project.title}
               <a href="#" onClick={this.deleteProject.bind(this, this.props.project.id)}>
                 <Glyphicon glyph="remove"></Glyphicon>
               </a>
             </Panel.Title>
           </Panel.Heading>
-          <br/>
           <ProgressBar now={this.props.project.progress} />
-          <Panel.Body>Notes: {this.props.project.notes}</Panel.Body>         
+          <br/>
           <Panel.Body>Category: {this.props.project.category}</Panel.Body>
-         
+          <Panel.Body><Label>Notes:</Label> 
+            <ContentEditable html={this.props.project.notes} onChange={this.handleChange}></ContentEditable>
+          </Panel.Body>
         </Panel>
       
     );
@@ -38,8 +43,9 @@ class ProjectItem extends Component {
 }
 
 ProjectItem.propTypes = {
-  project: React.PropTypes.object,
-  onDelete: React.PropTypes.func
+  project: PropTypes.object,
+  onDelete: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 export default ProjectItem;

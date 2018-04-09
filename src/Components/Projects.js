@@ -4,6 +4,7 @@ import ProjectItem from './ProjectItem';
 import { Panel } from 'react-bootstrap';
 import { PanelGroup } from "react-bootstrap";
 
+
 class Projects extends Component {
   deleteProject(id){
     this.props.onDelete(id);
@@ -25,10 +26,13 @@ class Projects extends Component {
     }
     return (
       <div className="Projects">
+        <h1>Project Manager</h1>
           <PanelGroup id="projectsPanel">
+            <Panel bsStyle="success">
               <Panel.Heading>
                 <Panel.Title>Latest Projects</Panel.Title>
               </Panel.Heading>
+              </Panel>
             {projectItems}
           </PanelGroup>
       </div>

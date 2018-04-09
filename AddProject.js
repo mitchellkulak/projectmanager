@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import uuid from 'uuid';
 //import { FormControl } from "react-bootstrap";
 import { Button } from 'react-bootstrap';
-//import FieldGroup from 'react-bootstrap';
+import FieldGroup from 'react-bootstrap';
 
 
 
@@ -41,11 +41,19 @@ class AddProject extends Component {
       });
     e.preventDefault();
   }
-  
+  formInstance = (
+    <form>
+      <FieldGroup
+        id="formControlsText"
+        type="text"
+        label="Text"
+        placeholder="Enter text"
+      />
+    </form>
+  );
   
 
-  render() 
-  {
+  render() {
     let categoryOptions = this.props.categories.map(category => {
       return <option key={category} value={category}>{category}</option>
     });
@@ -56,7 +64,6 @@ class AddProject extends Component {
       <div>
         <h3>Add Project</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
-
           <div>
             <label>Title</label><br />
             <input type="text" ref="title" />

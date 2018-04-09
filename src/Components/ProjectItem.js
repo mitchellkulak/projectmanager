@@ -5,12 +5,22 @@ import {Panel} from 'react-bootstrap';
 import {Label} from 'react-bootstrap';
 import ContentEditable from 'react-contenteditable';
 import {ProgressBar} from 'react-bootstrap';
+//import Dialog from "react-bootstrap";
 
 
 class ProjectItem extends Component {
   deleteProject(id){
     this.props.onDelete(id);
   }
+  constructor () {
+    super()
+    this.onClick = this.onClick.bind(this)
+  }
+
+  onClick () {
+    this.dialog.showAlert('Hello Dialog!')
+  }
+
 
   handleChange = evt => {
     // Change the project's current notes state.
@@ -18,6 +28,8 @@ class ProjectItem extends Component {
     // Send the project's id and updated notes to firebase.
     this.props.onChange(this.props.project.id, evt.target.value);
   };
+
+
 
   render() {
     return (

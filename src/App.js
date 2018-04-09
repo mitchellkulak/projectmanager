@@ -111,6 +111,18 @@ class App extends Component {
       }
     })
   }
+  
+  //Added this here, and in the markup. 
+  handleEditProgress(id, progress){
+    //console.log(id);
+    //console.log(notes);
+    let projectRef = firebaseRef.child("project");
+    projectRef.on("child_added", snapshot => {
+      if (snapshot.val().id === id) {
+        snapshot.ref.update({ progress: progress});
+      }
+    })
+  }
 
   render() {
     return (
@@ -121,7 +133,8 @@ class App extends Component {
               
               <Projects projects={this.state.projects} 
                         onChange={this.handleEditNotes.bind(this)} 
-                        onDelete={this.handleDeleteProject.bind(this)} />
+                        onDelete={this.handleDeleteProject.bind(this)}
+                        onProgressChange={this.handleEditProgress.bind(this)} />
               <hr />
               {/* <Todos todos={this.state.todos} /> */}
             </div>

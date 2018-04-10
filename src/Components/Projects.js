@@ -14,13 +14,18 @@ class Projects extends Component {
     this.props.onChange(id, notes);
   }
 
+  editProgress(id, notes){
+    this.props.onProgressChange(id, notes);
+  }
+
+
   render() {
     let projectItems;
     if(this.props.projects){
       projectItems = this.props.projects.map(project => {
         //console.log(project);
         return (
-          <ProjectItem onChange={this.editNotes.bind(this)} onDelete={this.deleteProject.bind(this)} key={project.title} project={project} />
+          <ProjectItem onChange={this.editNotes.bind(this)} onProgressChange={this.editProgress.bind(this)} onDelete={this.deleteProject.bind(this)} key={project.title} project={project} />
         );
       });
     }
@@ -43,7 +48,8 @@ class Projects extends Component {
 Projects.propTypes = {
   projects: PropTypes.array,
   onDelete: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  onProgressChange: PropTypes.func
 }
 
 export default Projects;

@@ -30,9 +30,12 @@ class ProjectItem extends Component {
   };
 
   handleProgressChange = evt => {
+    if(evt.target.value === "...")
+    {return;}
     //Emulated what you did in the above function. Will maybe have to change how "value" is passed?
     this.setState({html: evt.target.value});
     this.props.onProgressChange(this.props.project.id, evt.target.value);
+    location.reload();
     // ^^ Currently breaks here: "_this.props.onProgressChange is not a function"
   };
   
@@ -50,16 +53,22 @@ class ProjectItem extends Component {
             </Panel.Title>
           </Panel.Heading>
           <br/>
-          <Panel.Body>Progress: </Panel.Body>
-          <ProgressBar id="progressBar" bsStyle="success" now={this.props.project.progress} />
-          <select onChange={this.handleProgressChange}>
-              <option value="15">15</option>
+          <Panel.Body>Progress: <select onChange={this.handleProgressChange}>
+              <option value="...">...</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
               <option value="30">30</option>
-              <option value="45">45</option>
+              <option value="40">40</option>
+              <option value="50">50</option>
               <option value="60">60</option>
-              <option value="75">75</option>
+              <option value="70">70</option>
+              <option value="80">80</option>
               <option value="90">90</option>
-          </select>
+              <option value="100">100</option>
+          </select></Panel.Body>
+          
+          <ProgressBar id="progressBar" bsStyle="success" now={this.props.project.progress} />
+          
           <br/>
           <Panel.Body>Category: {this.props.project.category}</Panel.Body>
           <Panel.Body><Label>Notes:</Label> 
